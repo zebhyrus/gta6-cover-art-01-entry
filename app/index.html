@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vice Cover Studio — GTA-style cover art maker</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="brand-mark">VC</span><span class="brand-name">Vice Cover Studio</span></div>
+  <p class="tagline">Your photos. Your caption. A Vice City sunset poster.</p>
+</header>
+<main class="app">
+  <section class="controls" aria-label="Cover controls">
+    <div class="step"><span class="step-num">1</span><h2>Photos</h2></div>
+    <p class="hint">Add up to three photos. Click a panel in the preview, then drag it to move the photo and use the zoom slider. Or fill every panel with one photo.</p>
+    <div class="photo-row">
+      <label class="file-btn">Add photo <input id="photoFile" type="file" accept="image/*" multiple></label>
+      <button id="fillAll" type="button" class="ghost">Fill all panels</button>
+      <button id="samplePier" type="button" class="ghost">Try: pier</button>
+      <button id="sampleBoulevard" type="button" class="ghost">Try: boulevard</button>
+    </div>
+    <div id="panelList" class="panel-list" aria-label="Panels"></div>
+    <div class="slider-row">
+      <label for="zoom">Zoom <span id="zoomVal">1.0×</span></label>
+      <input id="zoom" type="range" min="1" max="3" step="0.05" value="1.2">
+    </div>
+    <div class="slider-row">
+      <label for="panX">Move sideways <span id="panXVal">0</span></label>
+      <input id="panX" type="range" min="-100" max="100" step="1" value="0">
+    </div>
+    <div class="slider-row">
+      <label for="panY">Move up / down <span id="panYVal">0</span></label>
+      <input id="panY" type="range" min="-100" max="100" step="1" value="0">
+    </div>
+
+    <div class="step"><span class="step-num">2</span><h2>Layout &amp; size</h2></div>
+    <label class="field">Poster layout
+      <select id="layout">
+        <option value="trio">Trio — three tall panels</option>
+        <option value="heroDuo">Hero + duo — one big, two small</option>
+        <option value="quad">Quad — four panels</option>
+        <option value="solo">Solo — one full photo</option>
+      </select>
+    </label>
+    <div class="seg" id="sizeSeg" role="group" aria-label="Export size">
+      <button type="button" data-size="1080x1080" class="on">1080 × 1080</button>
+      <button type="button" data-size="1080x1350">1080 × 1350</button>
+      <button type="button" data-size="1920x1080">1920 × 1080</button>
+    </div>
+
+    <div class="step"><span class="step-num">3</span><h2>Caption &amp; colour</h2></div>
+    <label class="field">Title
+      <input id="caption" type="text" maxlength="24" value="SUNSET HEIST">
+    </label>
+    <label class="field">Subtitle
+      <input id="subtitle" type="text" maxlength="40" value="VICE CITY · EST. 2026">
+    </label>
+    <label class="field">Title style
+      <select id="titleStyle">
+        <option value="sunset">Sunset gradient</option>
+        <option value="neon">Neon pink</option>
+        <option value="white">White with shadow</option>
+        <option value="gold">Gold foil</option>
+      </select>
+    </label>
+    <label class="field">Colour grade
+      <select id="grade">
+        <option value="sunset">Vice sunset — warm pink &amp; orange</option>
+        <option value="neon">Neon nights — magenta &amp; teal</option>
+        <option value="dusk">Palm dusk — deep purple</option>
+        <option value="clean">Clean — no grade</option>
+      </select>
+    </label>
+    <div class="toggles">
+      <label class="check"><input id="sunOn" type="checkbox" checked> Retro sun</label>
+      <label class="check"><input id="palmsOn" type="checkbox" checked> Palm silhouettes</label>
+      <label class="check"><input id="grainOn" type="checkbox" checked> Film grain</label>
+    </div>
+
+    <div class="step"><span class="step-num">4</span><h2>Export</h2></div>
+    <button id="export" type="button" class="export-btn">Export PNG</button>
+    <p id="status" role="status">Pick a photo to start — or try a sample.</p>
+    <p class="fine">Photos stay on your machine. Nothing is uploaded. Original art only: no game logos, artwork or fonts.</p>
+  </section>
+
+  <section class="preview" aria-label="Live preview">
+    <div class="canvas-wrap">
+      <canvas id="cover" width="1080" height="1080" aria-label="Cover preview"></canvas>
+      <p class="preview-note">Live preview — drag a photo inside its panel to move it.</p>
+    </div>
+  </section>
+</main>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
